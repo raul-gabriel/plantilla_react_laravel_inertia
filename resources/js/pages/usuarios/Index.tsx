@@ -3,9 +3,10 @@ import { Head, router, usePage, useForm } from '@inertiajs/react';
 import { PencilIcon, TrashIcon, PlusIcon } from 'lucide-react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import FormularioUsuario from './FormularioUsuario';
-import { Table } from '@/Components/ui/table';
+
 import { Pagination } from '@/Components/ui/Pagination';
 import { Usuario } from '@/types/typeGlobales';
+import { Table } from '@/Components/ui/Table';
 
 
 
@@ -36,11 +37,15 @@ export default function Index() {
     const [search, setSearch] = useState(filters.search || '');
 
 
-    function buscar(e: React.KeyboardEvent<HTMLInputElement>, search: string) {
+    /*function buscar(e: React.KeyboardEvent<HTMLInputElement>, search: string) {
         if (e.key === 'Enter') {
             e.preventDefault();
             router.get(route('usuarios.index'), { search }, { preserveState: true, replace: true });
         }
+    }*/
+
+    function buscar(search: string) {
+        router.get(route('usuarios.index'), { search }, { preserveState: true, replace: true });
     }
 
 
@@ -97,14 +102,22 @@ export default function Index() {
                 </div>
 
                 {/* Search */}
-                <input
-                    type="text"
-                    value={search}
-                    onChange={e => setSearch(e.target.value)}
-                    onKeyDown={e => buscar(e, search)}
-                    placeholder="Buscar usuarios..."
-                    className="border rounded-md px-3 py-2 w-full max-w-md"
-                />
+                <div className="flex items-center gap-2 w-full max-w-md">
+                    <input
+                        type="text"
+                        value={search}
+                        onChange={e => setSearch(e.target.value)}
+                        className="border rounded-md px-3 py-2 flex-1"
+                        placeholder="Buscar usuarios..."
+                    />
+                    <button
+                        onClick={() => buscar(search)}
+                        className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/70"
+                    >
+                        Buscar
+                    </button>
+                </div>
+
 
 
 
