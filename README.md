@@ -25,7 +25,7 @@ USE db_turismo;
 
 /*
 INSERT INTO usuarios (nombres, celular, dni, rol, correo, password, estado) VALUES 
-('Administrador del Sistema', '987654321', '12345678', 'administrador', 'cuscocode@gmail.com', SHA2('940500006', 256), 'activo');
+('Administrador del Sistema', '987654321', '12345678', 'administrador', 'admin@gmail.com', SHA2('123456', 256), 'activo');
 */
 
 
