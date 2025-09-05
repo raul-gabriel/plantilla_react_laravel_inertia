@@ -40,13 +40,14 @@ npm install lucide-react
 
 3. Configurar la base de datos
 Edita tu archivo .env:
+```bash
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=nombre_basededatos
 DB_USERNAME=root
 DB_PASSWORD=
-
+```
 
 Limpia la caché de configuración:
 ```bash
