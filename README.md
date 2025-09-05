@@ -16,6 +16,32 @@ Diseñado como base para proyectos de **Guimae** / **GTUP**.
 
 ---
 
+
+## base de datos
+```sql
+DROP DATABASE IF EXISTS db_turismo;
+CREATE DATABASE IF NOT EXISTS db_turismo;
+USE db_turismo;
+
+/*
+INSERT INTO usuarios (nombres, celular, dni, rol, correo, password, estado) VALUES 
+('Administrador del Sistema', '987654321', '12345678', 'administrador', 'cuscocode@gmail.com', SHA2('940500006', 256), 'activo');
+*/
+
+
+drop table if exists usuarios;
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombres VARCHAR(255) NOT NULL,
+    celular varchar(9),
+    dni varchar(8) not null,
+    rol  ENUM('administrador', 'visitante') DEFAULT 'visitante',
+	correo varchar(50) not null,
+    password varchar(300) not null,
+    estado ENUM('activo', 'inactivo') DEFAULT 'activo'
+);
+```
+
 ## 🛠️ Instalación
 
 ### 1. Crear un nuevo proyecto
@@ -48,6 +74,9 @@ DB_DATABASE=nombre_basededatos
 DB_USERNAME=root
 DB_PASSWORD=
 ```
+
+
+
 
 Limpia la caché de configuración:
 ```bash
@@ -126,4 +155,7 @@ crear controlador
 ```bash
 php artisan make:controller NombreDelControlador --resource
 ```
+
+
+
 
