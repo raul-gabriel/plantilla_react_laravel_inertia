@@ -55,3 +55,75 @@ php artisan config:clear
 composer run dev
 ```
 
+
+
+
+## 📁 Cambios Realizados en la Plantilla
+
+Se realizaron las siguientes modificaciones en la estructura del proyecto base de Laravel + Inertia.js + React:
+
+### 📄 Estilos
+
+- `resources/css/app.css`  
+  Se agregaron estilos personalizados globales para la plantilla.
+
+---
+
+### 👤 Modelo de Usuario
+
+- `app/Models/Usuario.php`  
+  Se creó un modelo personalizado `Usuario` (en lugar del modelo `User` por defecto). Puedes adaptarlo a tus necesidades según las tablas de tu base de datos.
+
+---
+
+### 🔐 Controladores de Autenticación
+
+- `app/Http/Controllers/Auth/`  
+  Se agregó un sistema de autenticación personalizado (login y logout) sin usar Breeze, Jetstream ni Fortify.  
+  Los controladores incluyen métodos como:
+  
+  ```php
+  public function index() // Muestra vista de login
+  public function iniciarSesion(Request $request) // Procesa login
+  public function destroy() // Logout
+```
+
+
+🛡️ Middleware Personalizado
+
+app/Http/Middleware/CheckLogin.php
+Middleware creado para proteger rutas que requieren autenticación manual.
+Este middleware verifica si el usuario ha iniciado sesión, y si no, redirige al login.
+
+```php
+Route::middleware(CheckLogin::class)->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+});
+```
+
+🧭 Rutas Personalizadas
+Archivo: routes/web.php
+Se agregaron rutas manuales para login, logout y dashboard protegido:
+
+Ejemplo de uso:
+```php
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'iniciarSesion']);
+Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+
+//Ruta protegida:
+Route::middleware(CheckLogin::class)->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+});
+```
+
+
+crear controlador
+```bash
+php artisan make:controller NombreDelControlador --resource
+```
+
