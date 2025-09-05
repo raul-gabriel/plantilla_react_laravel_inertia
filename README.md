@@ -82,7 +82,7 @@ Se realizaron las siguientes modificaciones en la estructura del proyecto base d
   Se agregó un sistema de autenticación personalizado (login y logout) sin usar Breeze, Jetstream ni Fortify.  
   Los controladores incluyen métodos como:
   
-  ```php
+```php
   public function index() // Muestra vista de login
   public function iniciarSesion(Request $request) // Procesa login
   public function destroy() // Logout
